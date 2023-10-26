@@ -49,7 +49,10 @@ func StartServer(port int) {
 		for {
 			sc, ok := serverConMap[tcon.RemoteAddr().String()]
 			if !ok {
-				c, err := net.DialUDP("udp", nil, &net.UDPAddr{Port: port})
+				c, err := net.DialUDP("udp", nil, &net.UDPAddr{
+					Port: port,
+					IP:   net.ParseIP("127.0.0.1"),
+				})
 				if err != nil {
 					log.Println("Failed to dial UDP " + err.Error())
 					continue

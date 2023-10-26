@@ -58,7 +58,10 @@ func StartClient(port int) {
 
 			cc, ok := clientConMap[remote.String()]
 			if !ok {
-				c, err := net.DialTCP("tcp", nil, &net.TCPAddr{Port: port})
+				c, err := net.DialTCP("tcp", nil, &net.TCPAddr{
+					Port: port,
+					IP:   net.ParseIP("127.0.0.1"),
+				})
 				if err != nil {
 					log.Println("Failed to connect TCP " + err.Error())
 					continue
